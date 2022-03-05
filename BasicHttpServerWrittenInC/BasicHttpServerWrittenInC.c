@@ -1,7 +1,6 @@
 ﻿#include <WS2tcpip.h>
 #include <Windows.h>
 #include <stdio.h>
-#include <assert.h>
 
 #pragma comment(lib, "Ws2_32.lib")
 
@@ -19,8 +18,6 @@ int main()
 
 		return 1;
 	}
-
-	assert(wsa_startup_result == 0);
 
 	SOCKADDR_IN server_address;
 	memset(&server_address, 0, sizeof server_address);
@@ -42,8 +39,6 @@ int main()
 		return 1;
 	}
 
-	assert(inet_pton_result == 1);
-
 	SOCKET listen_socket = socket(AF_INET, SOCK_STREAM, 0);
 	if (listen_socket == INVALID_SOCKET)
 	{
@@ -52,8 +47,6 @@ int main()
 
 		return 1;
 	}
-
-	assert(listen_socket != INVALID_SOCKET);
 
 	int bind_result = bind(listen_socket, (struct sockaddr*)&server_address, sizeof server_address);
 	if (bind_result != 0)
@@ -64,8 +57,6 @@ int main()
 		return 1;
 	}
 
-	assert(bind_result == 0);
-
 	int listen_result = listen(listen_socket, SOMAXCONN);
 	if (listen_result != 0)
 	{
@@ -74,8 +65,6 @@ int main()
 
 		return 1;
 	}
-
-	assert(listen_result == 0);
 
 	while (1)
 	{
